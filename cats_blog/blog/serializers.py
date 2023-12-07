@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Cat, Owner
+from .models import Cat, Owner, CHOICES
 
 import datetime as dt
 
@@ -20,6 +20,7 @@ class OwnerSerializer(serializers.ModelSerializer):
 class CatSerializer(serializers.ModelSerializer):
     owner = serializers.StringRelatedField(read_only=True)
     age = serializers.SerializerMethodField()
+    color = serializers.ChoiceField(choices=CHOICES)
 
     class Meta:
         model = Cat
