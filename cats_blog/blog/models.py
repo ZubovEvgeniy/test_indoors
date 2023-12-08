@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
@@ -10,24 +11,27 @@ CHOICES = (
     )
 
 
-class Owner(models.Model):
-    first_name = models.CharField(max_length=128)
-    last_name = models.CharField(max_length=128)
-
-    def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+User = get_user_model()
 
 
 class Cat(models.Model):
     name = models.CharField(max_length=16)
     color = models.CharField(max_length=16, choices=CHOICES)
-    birth_year = models.IntegerField(blank=True, null=True)
+    birth_year = models.IntegerField()
     breed = models.CharField(max_length=150)
     owner = models.ForeignKey(
-        Owner,
+        User,
         related_name='cats',
         on_delete=models.CASCADE,
     )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['name', 'owner'],
+                name='unique_name_owner'
+            )
+        ]
 
     def __str__(self):
         return self.name
