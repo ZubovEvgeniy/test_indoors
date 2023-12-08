@@ -77,16 +77,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cats_blog.wsgi.application'
 
-ASGI_APPLICATION = 'cats_blog.routing.application'
+ASGI_APPLICATION = 'cats_blog.asgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+        'BACKEND': 'channels.layers.InMemoryChannnelLayer',
         },
     },
-}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
