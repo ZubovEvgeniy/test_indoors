@@ -1,3 +1,18 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Cat
+
+
+class CatAdmin(admin.ModelAdmin):
+    list_display = ('name', 'color', 'birth_year', 'breed', 'owner',)
+    search_fields = (
+        'name',
+        )
+    list_filter = (
+        'birth_year',
+        'breed',
+        'owner',
+    )
+
+
+admin.site.register(Cat, CatAdmin)

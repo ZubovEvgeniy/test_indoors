@@ -12,14 +12,13 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'first_name',
-            'last_name',
+            'username',
             'cats',
         )
 
 
 class CatSerializer(serializers.ModelSerializer):
-    owner = serializers.PrimaryKeyRelatedField(
+    owner = serializers.StringRelatedField(
         read_only=True,
         default=serializers.CurrentUserDefault(),
     )
