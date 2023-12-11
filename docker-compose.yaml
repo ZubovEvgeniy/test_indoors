@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: cats_blog
 
   web:
-    build: .
+    image: evgeniyzubov/test_indoors:v1.0
     restart: always
     volumes:
       - static_volume:/app/static/
