@@ -6,8 +6,9 @@ services:
     image: postgres:13.0-alpine
     volumes:
       - db_data:/var/lib/postgresql/data/
-    env_file:
-      - ./.env
+    environment:
+      POSTGRES_USER: cats_blog
+      POSTGRES_PASSWORD: cats_blog
 
   web:
     build: .
@@ -21,6 +22,11 @@ services:
     env_file:
       - ./.env
     environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: cats_blog
+      DB_PASSWORD: cats_blog
+      DB_USER: cats_blog
       REDIS_HOST: redis
       REDIS_PORT: 6379
 
